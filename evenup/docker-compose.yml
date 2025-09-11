@@ -1,0 +1,102 @@
+# version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: evenup-postgres
+    environment:
+      POSTGRES_DB: evenup_development
+      POSTGRES_USER: evenup_user
+      POSTGRES_PASSWORD: evenup_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/src/migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U evenup_user -d evenup_development"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: evenup-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Backend API Server (commented out for local development)
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: evenup-backend
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     NODE_ENV: development
+  #     PORT: 3000
+  #     DB_HOST: postgres
+  #     DB_PORT: 5432
+  #     DB_NAME: evenup_development
+  #     DB_USER: evenup_user
+  #     DB_PASSWORD: evenup_password
+  #     REDIS_HOST: redis
+  #     REDIS_PORT: 6379
+  #     JWT_SECRET: development-jwt-secret-key
+  #     JWT_EXPIRES_IN: 7d
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   volumes:
+  #     - ./backend:/app
+  #     - /app/node_modules
+  #   restart: unless-stopped
+
+  # PgAdmin for database management (optional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: evenup-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@evenup.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+  # Redis Commander for Redis management (optional)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: evenup-redis-commander
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  default:
+    name: evenup-network

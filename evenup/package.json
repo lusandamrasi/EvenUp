@@ -1,0 +1,74 @@
+{
+  "name": "evenup",
+  "version": "1.0.0",
+  "description": "EvenUp - The smart way to split bills and track spending when dining out",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:start\"",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend:start": "cd frontend && npm start",
+    "frontend:ios": "cd frontend && npx react-native run-ios",
+    "frontend:android": "cd frontend && npx react-native run-android",
+    
+    "build": "npm run backend:build",
+    "backend:build": "cd backend && npm run build",
+    
+    "test": "npm run backend:test && npm run frontend:test",
+    "backend:test": "cd backend && npm test",
+    "frontend:test": "cd frontend && npm test",
+    
+    "lint": "npm run backend:lint && npm run frontend:lint",
+    "backend:lint": "cd backend && npm run lint",
+    "frontend:lint": "cd frontend && npm run lint",
+    
+    "lint:fix": "npm run backend:lint:fix && npm run frontend:lint:fix",
+    "backend:lint:fix": "cd backend && npm run lint:fix",
+    "frontend:lint:fix": "cd frontend && npm run lint:fix",
+    
+    "db:migrate": "node scripts/migrate.js",
+    "db:seed": "node scripts/seed.js",
+    "db:reset": "npm run db:seed -- --force",
+    
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build",
+    "docker:logs": "docker-compose logs -f",
+    
+    "setup": "chmod +x scripts/setup.sh && ./scripts/setup.sh",
+    "clean": "npm run backend:clean && npm run frontend:clean",
+    "backend:clean": "cd backend && rm -rf node_modules package-lock.json",
+    "frontend:clean": "cd frontend && rm -rf node_modules package-lock.json && cd ios && rm -rf Pods Podfile.lock && cd .."
+  },
+  "keywords": [
+    "bill-splitting",
+    "restaurant",
+    "mobile-app",
+    "react-native",
+    "nodejs",
+    "fintech"
+  ],
+  "author": "EvenUp Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/evenup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/evenup/issues"
+  },
+  "homepage": "https://github.com/yourusername/evenup#readme"
+}
