@@ -12,11 +12,11 @@ import {
 import { useDispatch } from 'react-redux';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import Button from '@components/common/Button';
-import { colors } from '@constants/colors';
-import type { LoginCredentials } from '../../../types/auth.types';
-import { useLoginMutation } from '@store/api/authApi';
-import { StorageService } from '@services/storageService';
+import Button from '../../components/common/Button';
+import { colors } from '../../constants/colors';
+import { LoginCredentials } from '../../types/auth.types';
+import { useLoginMutation } from '../../store/api/authApi';
+import { StorageService } from '../../services/storageService';
 
 interface LoginScreenProps {
   navigation: StackNavigationProp<any>;

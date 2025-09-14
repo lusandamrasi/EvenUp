@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { Provider, useDispatch } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
 
-import { store } from './src/store/index';
-import AppNavigator from './src/navigation/AppNavigator';
-import { colors } from './src/constants/colors';
-import { StorageService } from './src/services/storageService';
-import { restoreAuth } from './src/store/slices/authSlice';
+import { store } from './store/index';
+import AppNavigator from './navigation/AppNavigator';
+import { colors } from './constants/colors';
+import { StorageService } from './services/storageService';
+import { restoreAuth } from './store/slices/authSlice';
 
 const AppContent: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,13 +29,15 @@ const AppContent: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <NavigationContainer>
-      <StatusBar 
-        barStyle="dark-content" 
-        backgroundColor={colors.background} 
-      />
-      <AppNavigator />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <StatusBar 
+          barStyle="dark-content" 
+          backgroundColor={colors.background} 
+        />
+        <AppNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

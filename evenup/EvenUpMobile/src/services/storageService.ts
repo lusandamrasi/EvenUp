@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { User } from '@types/auth.types';
+import { User } from '../types/auth.types';
 
 const STORAGE_KEYS = {
   AUTH_TOKEN: '@evenup/auth_token',

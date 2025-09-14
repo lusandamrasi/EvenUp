@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Group } from '@types/order.types';
+import { Group } from '../../types/order.types';
 
 interface GroupState {
   currentGroup: Group | null;

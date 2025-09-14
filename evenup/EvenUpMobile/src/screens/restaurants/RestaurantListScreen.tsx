@@ -12,18 +12,18 @@ import {
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { colors } from '@constants/colors';
-import { Restaurant } from '@types/restaurant.types';
-import { useGetRestaurantsQuery } from '@store/api/restaurantApi';
-import Button from '@components/common/Button';
+import { colors } from '../../constants/colors';
+import { Restaurant } from '../../types/restaurant.types';
+import { useGetRestaurantsQuery } from '../../store/api/restaurantApi';
+import Button from '../../components/common/Button';
 
 interface RestaurantListScreenProps {
-  navigation: StackNavigationProp<any>;
+  navigation?: any;
 }
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, onPress }) => (
@@ -63,7 +63,8 @@ const RestaurantListScreen: React.FC<RestaurantListScreenProps> = ({ navigation 
   const pagination = restaurantsData?.data?.pagination;
 
   const handleRestaurantPress = (restaurant: Restaurant) => {
-    navigation.navigate('RestaurantDetail', { restaurantId: restaurant.id });
+    // For now just log the restaurant selection
+    console.log('Selected restaurant:', restaurant.name);
   };
 
   const handleLoadMore = () => {

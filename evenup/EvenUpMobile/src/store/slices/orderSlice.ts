@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { OrderState, Order } from '@types/order.types';
+import { OrderState, Order } from '../../types/order.types';
 
 const initialState: OrderState = {
   currentGroup: null,

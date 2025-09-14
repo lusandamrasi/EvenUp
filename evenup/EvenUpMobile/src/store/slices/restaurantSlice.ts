@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RestaurantState, Restaurant, MenuItem, RestaurantFilters } from '@types/restaurant.types';
+import { RestaurantState, Restaurant, MenuItem, RestaurantFilters } from '../../types/restaurant.types';
 
 const initialState: RestaurantState = {
   restaurants: [],

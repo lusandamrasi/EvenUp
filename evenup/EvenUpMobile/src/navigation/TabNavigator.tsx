@@ -2,8 +2,8 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text } from 'react-native';
 
-import { colors } from '@constants/colors';
-import RestaurantListScreen from '@screens/restaurants/RestaurantListScreen';
+import { colors } from '../constants/colors';
+import RestaurantListScreen from '../screens/restaurants/RestaurantListScreen';
 
 const Tab = createBottomTabNavigator();
 

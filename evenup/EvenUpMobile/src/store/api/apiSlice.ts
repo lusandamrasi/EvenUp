@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_CONFIG } from '@constants/api';
+import { API_CONFIG } from '../../constants/api';
 import { RootState } from '../index';
 
 // Base query with auth header

@@ -1,5 +1,5 @@
 import { apiSlice } from './apiSlice';
-import { RestaurantListResponse, MenuResponse, Restaurant } from '@types/restaurant.types';
+import { RestaurantListResponse, MenuResponse, Restaurant } from '../../types/restaurant.types';
 
 export const restaurantApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
